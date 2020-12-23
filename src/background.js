@@ -19,7 +19,6 @@ async function createWindow() {
   let display = screen.getAllDisplays()[0];
   const { width, height } = display.workAreaSize;
   const { x, y } = display.bounds;
-  const icon = nativeImage.createFromPath(path.join(__static, 'favicon.ico'));
   win = new BrowserWindow({
     x: config.has('x') ? config.get('x') : x,
     y: config.has('y') ? config.get('y') : y,
@@ -28,7 +27,7 @@ async function createWindow() {
     frame: false,
     show: false,
     backgroundColor: '#000000',
-    icon: icon,
+    icon: nativeImage.createFromPath(path.join(__dirname, '..', 'build', 'icon.ico')),
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true
@@ -42,7 +41,7 @@ async function createWindow() {
     win.maximize();
   }
 
-  tray = new Tray(icon);
+  tray = new Tray(path.join(__static, 'favicon.ico'));
   const contextMenu = Menu.buildFromTemplate([
     {
       label: 'Reload',
