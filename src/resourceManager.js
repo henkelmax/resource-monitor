@@ -17,6 +17,8 @@ export default async () => {
         coreUsages: cpu.cpus.map(e => e.load),
         ramUsed: mem.used,
         ramTotal: mem.total,
+        swapUsed: mem.swapused,
+        swapTotal: mem.swaptotal,
         cpuTemp: cpuTemperature.main,
         networkTX: defualtNetworkInterface.tx_sec,
         networkRX: defualtNetworkInterface.rx_sec,

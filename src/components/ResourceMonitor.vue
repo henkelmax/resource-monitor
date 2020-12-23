@@ -25,16 +25,18 @@
       style="grid-area: ramUsage"
     />
     <Graph
-      :data="cpuTemp"
-      :text="`CPU temp ${cpuTemp.slice(-1).pop().toFixed(0)}°C`"
+      :data="swapUsage"
+      :text="`Swap ${((swapUsed / swapTotal) * 100).toFixed(
+        0
+      )}% (${formatBinary(swapUsed)}/${formatBinary(swapTotal)})`"
       :max="100"
-      style="grid-area: cpuTemp"
+      style="grid-area: swapUsage"
     />
     <Graph
-      :data="cpuFanSpeed"
-      :text="`CPU fan speed ${cpuFanSpeed.slice(-1).pop().toFixed(0)}%`"
+      :data="cpuTemp"
+      :text="`CPU temp ${cpuTemp.slice(-1).pop().toFixed(0)}%`"
       :max="100"
-      style="grid-area: cpuFanSpeed"
+      style="grid-area: cpuTemp"
     />
 
     <Graph
@@ -159,13 +161,15 @@ export default {
       coreUsages: [[0]],
       ramTotal: 1,
       ramUsed: 0,
+      swapTotal: 1,
+      swapUsed: 0,
       gpuMemoryTotal: 1,
       gpuMemoryUsed: 0,
       gpuFanSpeedRPM: 0,
       cpuUsage: this.createArray(),
       ramUsage: this.createArray(),
+      swapUsage: this.createArray(),
       cpuTemp: this.createArray(),
-      cpuFanSpeed: this.createArray(),
       gpuUsage: this.createArray(),
       gpuMemory: this.createArray(),
       gpuTemp: this.createArray(),
@@ -198,8 +202,13 @@ export default {
       );
       this.ramUsed = data.ramUsed;
       this.ramTotal = data.ramTotal;
+      this.push(
+        this.swapUsage,
+        this.calculatePercentage(data.swapUsed, data.swapTotal)
+      );
+      this.swapUsed = data.swapUsed;
+      this.swapTotal = data.swapTotal;
       this.push(this.cpuTemp, data.cpuTemp);
-      this.push(this.cpuFanSpeed, -1);
       this.push(this.gpuUsage, data.gpuUsage);
       this.push(
         this.gpuMemory,
@@ -282,7 +291,7 @@ body {
   grid-gap: 0px;
   grid-template-areas:
     "cores cores cores cores cores cores cores cores cores cores cores cores"
-    "cpuUsage cpuUsage cpuUsage ramUsage ramUsage ramUsage cpuTemp cpuTemp cpuTemp cpuFanSpeed cpuFanSpeed cpuFanSpeed"
+    "cpuUsage cpuUsage cpuUsage ramUsage ramUsage ramUsage swapUsage swapUsage swapUsage cpuTemp cpuTemp cpuTemp"
     "gpuUsage gpuUsage gpuUsage gpuMemory gpuMemory gpuMemory gpuTemp gpuTemp gpuTemp gpuFanSpeed gpuFanSpeed gpuFanSpeed"
     "time time time prcessesCPU prcessesCPU prcessesCPU prcessesMemory prcessesMemory prcessesMemory networkSent networkSent networkSent"
     "test test test prcessesCPU prcessesCPU prcessesCPU prcessesMemory prcessesMemory prcessesMemory networkReceived networkReceived networkReceived";
