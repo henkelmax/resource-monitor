@@ -4,7 +4,7 @@ A window showing an overview of all system resources of your PC.
 
 > This program is only tested in Windows, but it should work on other platforms.
 
-![](https://i.imgur.com/aUEvkIP.png)
+![](https://i.imgur.com/A4X2RpX.png)
 
 ## Prerequisites
 
