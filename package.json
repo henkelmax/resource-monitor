@@ -1,6 +1,10 @@
 {
   "name": "resource-monitor",
   "version": "1.0.0",
+  "author": "Max Henkel",
+  "contributors": [
+    "Max Henkel"
+  ],
   "scripts": {
     "build": "vue-cli-service electron:build",
     "serve": "vue-cli-service electron:serve",
