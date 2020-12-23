@@ -28,6 +28,7 @@ async function createWindow() {
     show: false,
     backgroundColor: '#000000',
     icon: nativeImage.createFromPath(path.join(__dirname, '..', 'build', 'icon.ico')),
+    title: 'ResourceMonitor',
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true
