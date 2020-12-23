@@ -19,7 +19,7 @@ module.exports = {
           },
           linux: {
             target: ["deb", "rpm", "apk", "zip"],
-            icon: "build/128x128.png",
+            icon: "build/512x512.png",
             publish: [
               {
                 "provider": "github",
