@@ -1,7 +1,10 @@
 {
   "name": "resource-monitor",
   "version": "1.0.0",
-  "author": "Max Henkel",
+  "author": "Max Henkel <mh@maxhenkel.de>",
+  "homepage": "https://github.com/henkelmax/resource-monitor/",
+  "repository": "https://github.com/henkelmax/resource-monitor.git",
+  "license": "All Rights Reserved",
   "contributors": [
     "Max Henkel"
   ],
