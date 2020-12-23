@@ -146,7 +146,10 @@
 <script>
 import Graph from "./Graph";
 import prettyBytes from "pretty-bytes";
+const Store = window.require("electron-store");
 const { ipcRenderer } = window.require("electron");
+
+const store = new Store();
 
 export default {
   name: "ResourceMonitor",
@@ -174,7 +177,7 @@ export default {
     };
   },
   mounted() {
-    this.$refs.text.innerText = localStorage.getItem("text");
+    this.$refs.text.innerText = store.get("notes", "");
   },
   created() {
     ipcRenderer.on("data", (event, data) => {
@@ -229,7 +232,7 @@ export default {
       return Math.round((current / total) * 100);
     },
     handleInput(e) {
-      localStorage.setItem("text", e.target.innerText);
+      store.set("notes", e.target.innerText);
     },
     formatBinary(amount) {
       return prettyBytes(amount, { binary: true });
