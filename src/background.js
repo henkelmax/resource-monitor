@@ -24,6 +24,8 @@ async function createWindow() {
     y: config.has('y') ? config.get('y') : y,
     width: config.has('width') ? config.get('x') : width,
     height: config.has('width') ? config.get('x') : height,
+    minWidth: 800,
+    minHeight: 600,
     frame: false,
     show: false,
     backgroundColor: '#000000',
@@ -68,6 +70,26 @@ async function createWindow() {
 
   win.once('ready-to-show', () => {
     win.show();
+  });
+
+  win.on("resize", () => {
+    const [width, height] = win.getSize();
+    config.lazySet("width", width);
+    config.lazySet("height", height);
+  });
+
+  win.on("move", () => {
+    const [x, y] = win.getPosition();
+    config.lazySet("x", x);
+    config.lazySet("y", y);
+  });
+
+  win.on("maximize", () => {
+    config.lazySet("maximized", true);
+  });
+
+  win.on("unmaximize", () => {
+    config.lazySet("maximized", false);
   });
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
